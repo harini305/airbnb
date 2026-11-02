@@ -1,0 +1,305 @@
+/* ---------- Hero ---------- */
+.hero {
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  align-items: center;
+  padding-block: 24px 32px;
+  background: linear-gradient(180deg, #fff 0%, var(--rausch-100) 100%);
+}
+
+.heroInner { display: grid; gap: 24px; align-items: center; }
+
+.heroCopy { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.heroCopy h1 { max-width: 14ch; }
+.heroCopy .lead { max-width: 50ch; }
+.heroNote { font-size: var(--fs-small); color: var(--ink-2); }
+
+.triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  height: clamp(200px, 34svh, 300px);
+}
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--grey-2);
+  isolation: isolate; /* own layer: the rounded clip stays steady while the inside zooms */
+}
+.frameZoom {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.frameImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+}
+.frameNext { opacity: 0; will-change: opacity; }
+
+@media (min-width: 744px) {
+  .triptych { gap: 14px; height: 340px; }
+}
+@media (min-width: 1128px) {
+  .heroInner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; }
+  .triptych {
+    height: min(calc(100svh - var(--header-h) - 72px), 680px);
+    gap: 16px;
+  }
+}
+
+/* ---------- Shared ---------- */
+.rowHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 20px;
+}
+.textLink {
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+.textLink:hover { color: var(--rausch-deep); }
+
+.rail {
+  list-style: none;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 8px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 70%);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+.rail > li { scroll-snap-align: start; }
+
+/* ---------- Type of service: real listing photos ---------- */
+.typePhotos {
+  list-style: none;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 6px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 78%);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+}
+.typePhotos li { scroll-snap-align: start; }
+.typePhoto {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--grey-2);
+  text-decoration: none;
+}
+.typePhoto img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.typePhoto:hover img { transform: scale(1.03); }
+.typeLabel {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: #fff;
+  line-height: 1.25;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.14);
+}
+.typeLabel strong { font-size: 1.0625rem; }
+.typeLabel span { font-size: var(--fs-small); color: var(--ink-2); }
+
+.typePills {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.typePills a {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-weight: 600;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease;
+}
+.typePills a:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+
+@media (min-width: 744px) {
+  .typePhotos {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+  }
+}
+
+/* ---------- Local: Photography in Sholinganallur ---------- */
+.local { background: var(--grey-1); }
+.localInner { display: grid; gap: 20px; }
+
+.localPanel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: #fff;
+}
+.localArt { width: clamp(84px, 26vw, 120px); height: auto; aspect-ratio: 1; flex: none; object-fit: cover; border-radius: var(--radius-sm); }
+.localCopy { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.localCopy h2 { overflow-wrap: anywhere; }
+.localCopy h2 { font-size: var(--fs-h3); }
+
+@media (min-width: 744px) {
+  .localRail {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+}
+@media (min-width: 1128px) {
+  .localInner { grid-template-columns: minmax(0, 1fr) minmax(0, 4fr); gap: 20px; }
+  .localPanel {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px;
+  }
+  .localArt { width: 100%; height: 0; aspect-ratio: auto; flex: 1 1 0; min-height: 180px; }
+  .localCopy h2 { font-size: var(--fs-h3); }
+}
+
+/* ---------- Destinations ---------- */
+.cityHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 20px;
+}
+.cityTabs {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--grey-2);
+}
+.cityTab {
+  border: 0;
+  background: transparent;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.cityTab:hover { background: #fff; }
+.cityTab[aria-selected="true"] { background: #fff; box-shadow: 0 2px 8px rgb(0 0 0 / 0.12); }
+
+.cityRail { grid-auto-columns: minmax(220px, 70%); }
+@media (min-width: 744px) { .cityRail { grid-auto-columns: calc((100% - 32px) / 3.2); } }
+@media (min-width: 1128px) { .cityRail { grid-auto-columns: calc((100% - 64px) / 5); } }
+
+.seeAllTile a {
+  height: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  text-align: center;
+  border-radius: var(--radius);
+  background: var(--grey-1);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.seeAllTile a:hover { background: var(--grey-2); }
+.seeAllTile .muted { font-weight: 500; font-size: var(--fs-small); }
+
+/* ---------- Offer band (last section) ---------- */
+.offer { background: var(--rausch-100); }
+.offerInner { display: grid; gap: 28px; align-items: center; }
+.offerCopy { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.offerCopy h2 { max-width: 16ch; }
+.offerCopy .lead { color: var(--ink); }
+
+.offerArt {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.offerArt li {
+  aspect-ratio: 3 / 5;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--grey-2);
+}
+.offerArt img { width: 100%; height: 100%; object-fit: cover; }
+
+.offerVisual { display: flex; flex-direction: column; gap: 12px; }
+.offerStrip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 18px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #fff;
+}
+.offerStrip img { width: 100%; }
+.offerStrip p { font-weight: 600; }
+
+@media (min-width: 744px) {
+  .offerInner { grid-template-columns: 1fr 1.3fr; gap: 40px; }
+}
+@media (min-width: 1128px) {
+  .offerInner { gap: 72px; }
+  .offerArt { gap: 16px; }
+  .offerVisual { gap: 16px; }
+}
+
+/* Desktop: the band fills exactly the screen left by header + footer.
+   Portraits stretch or shrink to absorb the height, so nothing overflows or leaves a gap. */
+@media (min-width: 900px) and (min-height: 600px) {
+  .offerInner { flex: 1; align-items: stretch; }
+  .offerCopy { align-self: center; }
+  .offerArt { flex: 1 1 0; min-height: 120px; }
+  .offerArt li { aspect-ratio: auto; }
+  .offerStrip img { max-height: 16svh; width: auto; max-width: 100%; align-self: center; }
+}

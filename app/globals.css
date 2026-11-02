@@ -1,0 +1,206 @@
+/* Airbnb Services redesign demo — tokens and base styles.
+   Two families only: Plus Jakarta Sans (headings) and Figtree (everything else).
+   Airbnb Cereal (the logo font) is proprietary, so the closest open geometric sans pair is used. */
+
+:root {
+  --font-display: "Plus Jakarta Sans Variable", system-ui, sans-serif;
+  --font-body: "Figtree Variable", system-ui, sans-serif;
+
+  /* Palette from docs/source-audit/05-brand-reference.md */
+  --ink: #222222;
+  --ink-2: #6c6c6c;
+  --paper: #ffffff;
+  --grey-1: #f7f7f7;
+  --grey-2: #f2f2f2;
+  --line: #dddddd;
+  --rausch: #ff385c;
+  --rausch-deep: #da1249;
+  --rausch-100: #fff5f6;
+  --rausch-200: #ffeef0;
+  --rausch-1000: #361a21;
+  --cta: linear-gradient(to right, #da1249 0%, #e31c5f 50%, #d70466 100%);
+  --focus: #222222;
+
+  /* Type scale */
+  --fs-h1: clamp(2.125rem, 1.45rem + 2.6vw, 3.5rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.12rem + 0.5vw, 1.5rem);
+  --fs-body: 1rem;
+  --fs-lead: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --fs-small: 0.875rem;
+
+  /* Layout */
+  --header-h: 72px;
+  --footer-h: 140px;
+  --section-gap: 32px;
+  --gutter: 16px;
+  --max: 1320px;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --shadow: 0 6px 20px rgb(0 0 0 / 0.12);
+}
+
+@media (min-width: 744px) {
+  :root { --gutter: 24px; --header-h: 80px; }
+}
+@media (min-width: 1128px) {
+  :root { --gutter: 40px; }
+}
+@media (min-width: 1440px) {
+  :root { --gutter: 48px; }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); letter-spacing: -0.01em; line-height: 1.2; }
+
+p { margin: 0; }
+a { color: inherit; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+button, input, select { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--section-gap); }
+
+/* Last section on a page shares one viewport with the footer. */
+.fit-footer {
+  min-height: calc(100svh - var(--header-h) - var(--footer-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lead { font-size: var(--fs-lead); color: var(--ink-2); }
+.muted { color: var(--ink-2); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 650;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.btn-primary { background: var(--cta); color: #fff; }
+.btn-primary:hover { background: var(--rausch-deep); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; }
+.btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn:active { transform: scale(0.98); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--grey-2);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* Shared form control look */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+.control {
+  width: 100%;
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--ink);
+  appearance: none;
+  cursor: pointer;
+}
+.control:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

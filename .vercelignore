@@ -1,0 +1,6 @@
+assets-source
+docs
+scripts
+.next
+node_modules
+*.log

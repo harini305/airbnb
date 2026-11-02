@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+*.log
+.env*
+!.env.example
+.vercel
+
+# Local-only source material: audit, HD originals, reports
+assets-source
+docs
